@@ -1,0 +1,369 @@
+.header {
+  width: 100%;
+  font-family: 'Montserrat', sans-serif;
+  color: #ffffff;
+  padding: 1.625rem 8rem 2.125rem 8rem;
+  background-image: url("../assets/header.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  flex-wrap: wrap;
+  &:after {
+    content: '';
+    background: rgba(31,32,33,0.79);
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    position: absolute;
+  }
+
+  &-menuWrapper, &-logo {
+    z-index: 1;
+  }
+
+  &-burgerMenu {
+    display: none;
+  }
+
+  &-upper {
+    position: relative;
+    margin: 0 8.125rem;
+    z-index: 2;
+  }
+
+  &-logo {
+    width: 4.875rem;
+    height: 4.875rem;
+    margin: 0 auto 0 0;
+  }
+
+  &-menuWrapper {
+    width: 86%;
+  }
+
+  &-menu {
+    margin: 0 auto 0 0;
+  }
+
+  &-hrefs {
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 1.375em;
+    text-decoration: none;
+    width: 7.375rem;
+    color: #ffffff;
+    position: relative;
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 0;
+      width: 100%;
+      transform: scaleX(0);
+      bottom: 25%;
+      background: #ffffff;
+      height: 0.25rem;
+      -webkit-transition-duration: 0.3s;
+      transition-duration: 0.3s;
+      -webkit-transition-timing-function: ease-in;
+      transition-timing-function: ease-in;
+      border-radius: 4px;
+      animate: all;
+    }
+
+    &:active {
+      &:before {
+        background: #6EBBD3;
+        -webkit-transition-duration: 0.05s;
+        transition-duration: 0.05s;
+      }
+    }
+
+    &:focus {
+      &:before {
+        background: #6EBBD3;
+        transform: scaleX(0.5) scaleY(0.5);
+      }
+    }
+  }
+
+  &-call {
+    margin: 1.5rem 0 0 auto;
+    text-align: right;
+  }
+
+  &-phone {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+    line-height: 1.875rem;
+    margin-bottom: 0.188rem;
+    text-decoration: none;
+    color: #ffffff;
+  }
+
+  &-callUs {
+    font-size: 1.125rem;
+    line-height: 1.375rem;
+    -webkit-transition-duration: 0.3s;
+    transition-duration: 0.3s;
+  }
+
+  &-bottom {
+    position: relative;
+    width: 60%;
+    font-weight: 700;
+    font-size: 2.375em;
+    line-height: 2.875em;
+    color: #ffffff;
+    margin: 0.25rem 0 0 0;
+    z-index: 2;
+  }
+
+}
+
+@keyframes buzzer {
+  10% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  20% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  30% {
+    -webkit-transform: translateX(3px) rotate(2deg);
+    transform: translateX(3px) rotate(2deg);
+  }
+  40% {
+    -webkit-transform: translateX(-3px) rotate(-2deg);
+    transform: translateX(-3px) rotate(-2deg);
+  }
+  50% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  60% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  70% {
+    -webkit-transform: translateX(2px) rotate(1deg);
+    transform: translateX(2px) rotate(1deg);
+  }
+  80% {
+    -webkit-transform: translateX(-2px) rotate(-1deg);
+    transform: translateX(-2px) rotate(-1deg);
+  }
+  90% {
+    -webkit-transform: translateX(1px) rotate(0);
+    transform: translateX(1px) rotate(0);
+  }
+  100% {
+    -webkit-transform: translateX(-1px) rotate(0);
+    transform: translateX(-1px) rotate(0);
+  }
+}
+
+@media screen and (min-width: 279px) and (max-width: 927px) and (orientation: portrait), (min-height: 279px) and (max-height: 654px) and (orientation: landscape) {
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0;
+    width: 100vw;
+    &:after {
+      width: inherit;
+    }
+
+    &-menuWrapper {
+      position: absolute;
+      top: -60vh;
+      justify-content: space-around;
+      width: inherit;
+      transition: all 0.6s ease-out 0s;
+      z-index: 3;
+      background: url("../assets/header.png") no-repeat center;
+      background-size: cover;
+      padding: 0;
+      margin: 0 auto;
+      &:after {
+        content: '';
+        background: rgba(31,32,33,0.96);
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        position: absolute;
+        z-index: -1;
+      }
+    }
+
+    &-logo {
+      margin: 0 auto;
+    }
+
+    &-menu {
+      flex-direction: column;
+      margin: 0 0 0 0.8rem;
+    }
+
+    &-hrefs {
+      margin: .2rem 0 .5rem;
+      justify-content: left;
+      justify-content: start;
+    }
+
+    &-menuWrapper.openMenu {
+      padding: 8px 24px 8px 10px;
+      top:0;
+      left: 0;
+    }
+
+    &-burgerMenu {
+      display: block;
+      width: 3rem;
+      height: 3.8rem;
+      position: relative;
+      z-index: 4;
+      background: none;
+      border: none;
+      padding: 0;
+      margin: 0 auto;
+      &:before, &:after {
+        transition: all 0.3s ease-in;
+        content: '';
+        display: block;
+        width: inherit;
+        height: 0.33rem;
+        background: white;
+        border-radius: 5px;
+        position: absolute;
+      }
+    }
+
+    &-burgerMenu:before {
+      top: 25%;
+    }
+
+    &-buttonPart {
+      transition: all 0.5s ease-out;
+      top: 50%;
+      display: block;
+      position: absolute;
+      width: inherit;
+      height: 0.33rem;
+      background: white;
+      border-radius: 5px;
+    }
+
+    &-burgerMenu:after {
+      top: 75%;
+    }
+
+    &-burgerMenu.openMenu  {
+        &:before {
+          transform: rotate(45deg);
+          top: 25px;
+        }
+
+        .header-buttonPart {
+          transform: rotate(20deg) translateX(100px) scale(0);
+        }
+
+        &:after {
+          top: 25px;
+          transform: rotate(-45deg);
+        }
+    }
+
+    &-bottom {
+      width: auto;
+      font-size: 1.5rem;
+      line-height: 1.8rem;
+      margin: 0;
+    }
+
+    &-call {
+      align-self: flex-end;
+    }
+
+
+  }
+
+
+}
+
+@media only screen and (width: 280px) and (width: 653px) and (orientation: portrait) and (-webkit-min-device-pixel-ratio: 3) {
+  .header {
+    background: #1F2021;
+    &-burgerMenu {
+      width: 2rem;
+      height: 2.8rem;
+    }
+    &-logo {
+      width: 2rem;
+      height: 2rem;
+    }
+
+  }
+}
+
+@media (min-width: 992px) {
+ .header {
+   &-hrefs {
+     &:hover {
+       &:before {
+         -webkit-transform: scaleX(0.7);
+         transform: scaleX(0.7);
+       }
+     }
+     &:active {
+       color: #6EBBD3;
+     }
+   }
+
+     &-callUs {
+       &:hover {
+         -webkit-animation-name: buzzer;
+         animation-name: buzzer;
+         -webkit-animation-duration: 0.75s;
+         animation-duration: 0.75s;
+         -webkit-animation-timing-function: linear;
+         animation-timing-function: linear;
+         -webkit-animation-iteration-count: 1;
+         animation-iteration-count: 1;
+       }
+
+   }
+
+ }
+
+}
+
+@media (min-width: 1441px) {
+
+  .header {
+    background-size: contain;
+    background-position: center;
+    &:before {
+      content: '';
+      background: linear-gradient(90deg, #1a1a1c 0%, #010101 50%, #292826 51%, #30281f 100%);
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      position: absolute;
+      z-index: -1;
+    }
+
+    &-bottom {
+    }
+  }
+}
+
+
+
+
+
