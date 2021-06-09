@@ -60,7 +60,7 @@ export default {
     },
 
     validateEmail(email) {
-      let regexp = /\S+@\S+\.\S+/;
+      let regexp = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
       return regexp.test(email);
     },
 
