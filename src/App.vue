@@ -37,12 +37,38 @@ export default {
     catsArrayFromBackend: [],
     scrolled: null,
     scrollSpeed: 0.94,
-    sortingPriceCriteria: "toHighPrice",
-    sortingAgeCriteria: "toHighAge",
+    sortingPriceCriteria: "TO_HIGH_PRICE",
+    sortingAgeCriteria: "TO_HIGH_AGE",
     favoritesModalSettings: {
       isShow: false,
       message: "",
       counter: null,
+    },
+    classSettings: {
+      TO_HIGH_PRICE: function () {
+        document.getElementById('ageSortButton').classList.remove('sortInUse');
+        document.getElementById('priceSort').classList.remove('toLow');
+        document.getElementById('priceSort').classList.add('toBig');
+        document.getElementById('priceSortButton').classList.add('sortInUse');
+      },
+      TO_LOW_PRICE: function () {
+        document.getElementById('ageSortButton').classList.remove('sortInUse');
+        document.getElementById('priceSort').classList.remove('toBig');
+        document.getElementById('priceSort').classList.add('toLow');
+        document.getElementById('priceSortButton').classList.add('sortInUse');
+      },
+      TO_HIGH_AGE: function () {
+        document.getElementById('priceSortButton').classList.remove('sortInUse');
+        document.getElementById('ageSort').classList.remove('toLow');
+        document.getElementById('ageSort').classList.add('toBig');
+        document.getElementById('ageSortButton').classList.add('sortInUse');
+      },
+      TO_LOW_AGE: function () {
+        document.getElementById('priceSortButton').classList.remove('sortInUse');
+        document.getElementById('ageSort').classList.remove('toBig');
+        document.getElementById('ageSort').classList.add('toLow');
+        document.getElementById('ageSortButton').classList.add('sortInUse');
+      },
     },
   }),
   created() {
@@ -65,97 +91,51 @@ export default {
 
     randomCats(count) {
       let id = 1;
+      const catsBreeds = {
+        1: "Азиатская кошка",
+        2: "Той-бобтейл",
+        3: "Дракон Ли, Ли Хуа ( Ли Мао )",
+        4: "Американская многопалая кошка",
+        5: "Кольцехвостая кошка (Американский рингтейл)",
+        6: "Кохона (Гавайская бесшерстная кошка)",
+        7: "Персидская кошка",
+        8: "Эгейская кошка",
+        9: "Рагамаффин",
+        10: "Анатолийская короткошерстная кошка (Турецкая короткошерстная кошка)",
+      };
+      const catsColors = {
+        1: "Темный окрас",
+        2: "Дымчатый окрас",
+        3: "Полосатый хвост",
+        4: "Кольцевой окрас",
+        5: "Трехцветный окрас",
+        6: "Белый окрас",
+        7: "Многоцветный окрас",
+        8: "Полосатый окрас",
+        9: "Пятнистый окрас",
+        10: "Однотонный окрас",
+      };
+
       for (let i = 0; i < count; i++) {
-        let name = null;
-        let color = null;
-        let age = this.getRandomNumber(1, 24);
-        let price = this.getRandomNumber(500, 20000);
-        let isSold = this.getRandomNumber(0, 1) ? true : false;
-        let discount = this.getRandomNumber(0, 1)
-          ? `-${this.getRandomNumber(1, 40)}%`
-          : "";
-
-        switch (this.getRandomNumber(1, 10)) {
-          case 1:
-            name = "Азиатская кошка";
-            break;
-          case 2:
-            name = "Той-бобтейл";
-            break;
-          case 3:
-            name = "Дракон Ли, Ли Хуа ( Ли Мао )";
-            break;
-          case 4:
-            name = "Американская многопалая кошка";
-            break;
-          case 5:
-            name = "Кольцехвостая кошка (Американский рингтейл)";
-            break;
-          case 6:
-            name = "Кохона (Гавайская бесшерстная кошка)";
-            break;
-          case 7:
-            name = "Той-бобтейл";
-            break;
-          case 8:
-            name = "Эгейская кошка";
-            break;
-          case 9:
-            name = "Рагамаффин";
-            break;
-          case 10:
-            name =
-              "Анатолийская короткошерстная кошка (Турецкая короткошерстная кошка)";
-            break;
-        }
-
-        switch (this.getRandomNumber(1, 10)) {
-          case 1:
-            color = "Темный окрас";
-            break;
-          case 2:
-            color = "Дымчатый окрас";
-            break;
-          case 3:
-            color = "Полосатый хвост";
-            break;
-          case 4:
-            color = "Кольцевой окрас";
-            break;
-          case 5:
-            color = "Трехцветный окрас";
-            break;
-          case 6:
-            color = "Белый окрас";
-            break;
-          case 7:
-            color = "Многоцветный окрас";
-            break;
-          case 8:
-            color = "Полосатый окрас";
-            break;
-          case 9:
-            color = "Пятнистый окрас";
-            break;
-          case 10:
-            color = "Однотонный окрас";
-            break;
-        }
         this.catsArrayFromBackend.push({
           id: id++,
-          discount: discount,
+          discount: this.getRandomNumber(0, 1) ? `-${this.getRandomNumber(1, 40)}%` : '',
           liked: false,
           src: `img/cat${this.getRandomNumber(1, 3)}.png`,
-          name: name,
-          color: color,
-          age: age,
+          name: catsBreeds[this.getRandomNumber(1, 10)],
+          color: catsColors[this.getRandomNumber(1, 10)],
+          age: this.getRandomNumber(1, 24),
           paws: 4,
-          price: price,
-          isSold: isSold,
+          price: this.getRandomNumber(500, 20000),
+          isSold: this.getRandomNumber(0, 1) ? true : false,
         });
       }
     },
 
+    isInclude(array, catsId) {
+      return array.indexOf(catsId) > -1;
+    },
+    
     showNextCats(count) {
       this.quantity += count;
       if (this.catsArrayFromBackend.length <= this.quantity) {
@@ -163,10 +143,10 @@ export default {
       }
     },
 
-    toggleFavorites(idFromObject) {
+    toggleFavorites(catsId) {
       let isNeedDelete = true;
-      if (!(this.favoritesCats.indexOf(idFromObject) > -1)) {
-        this.favoritesCats.push(idFromObject);
+      if (!this.isInclude(this.favoritesCats, catsId)) {
+        this.favoritesCats.push(catsId);
         this.favoritesCats.sort(function (a, b) {
           return a - b;
         });
@@ -178,8 +158,8 @@ export default {
         this.favoritesModalSettings.counter = this.favoritesCats.length;
       }
 
-      if (this.favoritesCats.indexOf(idFromObject) > -1 && isNeedDelete) {
-        this.favoritesCats.splice(this.favoritesCats.indexOf(idFromObject), 1);
+      if (this.isInclude(this.favoritesCats, catsId) && isNeedDelete) {
+        this.favoritesCats.splice(this.favoritesCats.indexOf(catsId), 1);
         this.favoritesCats.sort(function (a, b) {
           return a - b;
         });
@@ -213,36 +193,22 @@ export default {
     sortCats(criteria) {
       if (criteria == "price") {
         switch (this.sortingPriceCriteria) {
-          case "toHighPrice":
+          case "TO_HIGH_PRICE":
             {
               this.catsArrayFromBackend.sort(function (itemA, itemB) {
                 return itemA.price - itemB.price;
               });
-              this.sortingPriceCriteria = "toLowPrice";
-              document
-                .getElementById("ageSortButton")
-                .classList.remove("sortInUse");
-              document.getElementById("priceSort").classList.remove("toLow");
-              document.getElementById("priceSort").classList.add("toBig");
-              document
-                .getElementById("priceSortButton")
-                .classList.add("sortInUse");
+              this.classSettings[this.sortingPriceCriteria]();
+              this.sortingPriceCriteria = "TO_LOW_PRICE";
             }
             break;
-          case "toLowPrice":
+          case "TO_LOW_PRICE":
             {
               this.catsArrayFromBackend.sort(function (itemA, itemB) {
                 return itemB.price - itemA.price;
               });
-              this.sortingPriceCriteria = "toHighPrice";
-              document
-                .getElementById("ageSortButton")
-                .classList.remove("sortInUse");
-              document.getElementById("priceSort").classList.remove("toBig");
-              document.getElementById("priceSort").classList.add("toLow");
-              document
-                .getElementById("priceSortButton")
-                .classList.add("sortInUse");
+              this.classSettings[this.sortingPriceCriteria]();
+              this.sortingPriceCriteria = "TO_HIGH_PRICE";
             }
             break;
         }
@@ -250,36 +216,22 @@ export default {
 
       if (criteria == "age") {
         switch (this.sortingAgeCriteria) {
-          case "toHighAge":
+          case "TO_HIGH_AGE":
             {
               this.catsArrayFromBackend.sort(function (itemA, itemB) {
                 return itemA.age - itemB.age;
               });
-              this.sortingAgeCriteria = "toLowAge";
-              document
-                .getElementById("priceSortButton")
-                .classList.remove("sortInUse");
-              document.getElementById("ageSort").classList.remove("toLow");
-              document.getElementById("ageSort").classList.add("toBig");
-              document
-                .getElementById("ageSortButton")
-                .classList.add("sortInUse");
+              this.classSettings[this.sortingAgeCriteria]();
+              this.sortingAgeCriteria = "TO_LOW_AGE";
             }
             break;
-          case "toLowAge":
+          case "TO_LOW_AGE":
             {
               this.catsArrayFromBackend.sort(function (itemA, itemB) {
                 return itemB.age - itemA.age;
               });
-              this.sortingAgeCriteria = "toHighAge";
-              document
-                .getElementById("priceSortButton")
-                .classList.remove("sortInUse");
-              document.getElementById("ageSort").classList.remove("toBig");
-              document.getElementById("ageSort").classList.add("toLow");
-              document
-                .getElementById("ageSortButton")
-                .classList.add("sortInUse");
+              this.classSettings[this.sortingAgeCriteria]();
+              this.sortingAgeCriteria = "TO_HIGH_AGE";
             }
             break;
         }
